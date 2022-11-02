@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block  metadescription %}
+     {% if category %}
+      {{ category.descriptions|truncatewords:155 }}
+      {% else %}
+         Welcome to fresh market where you can buy different items.....
+     {% endif %}
+{% endblock %}
+{% block title %}
+{% if category %}
+    {{ category.name }} - FRESH MARKET
+   {% else %}
+     SEE OUR NEW COLLECTIONS FRESH MARKET
+   {% endif %}
+{% endblock %}
+
+{% block content %}
+{% if category %}
+  <div>
+      <p><a href="{% url 'shopapp:allProdCat' %}">Our Product Collections</a></p>
+  </div>
+{% endif %}
+ <div>
+     {% if category %}
+     <img src="{{category.image.url}}" alt="{{category.name}}">
+
+ </div>
+   <br>
+<div>
+    <h1>{{category.name}}</h1>
+    <p>{{category.description}}</p>
+</div>
+ {% else %}
+<div>
+<img src="{% static 'img/banner.png' %}" alt="our products">
+</div>
+<br>
+<div>
+    <h1> OUR PRODUCT COLLECTIONS </h1>
+    <p>When using Lorem Ipsum for creating dummy content for your newly created website, you can select the text formats you want from the tool. Like, words, sentences, or paragraphs.</p>
+</div>
+  {% endif %}
+<div>
+    <div>
+        {% for product in products %}
+        <div>
+            <div>
+                <a href=""><img src="{{product.image.url}}" alt="{{product.name}}"></a>
+            <div>
+                <h4>{{product.name</h4>
+                <p>{{product.price}}</p>
+            </div>
+            </div>
+        </div>
+         {% endfor %}
+    </div>
+</div>
+{% endblock %}
